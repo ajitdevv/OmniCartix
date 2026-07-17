@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { SkipLink } from './components/layout/SkipLink'
 import { PageLoader } from './components/layout/PageLoader'
 import { ScrollProgress } from './components/layout/ScrollProgress'
@@ -14,8 +14,25 @@ import { TermsAndConditions } from './routes/TermsAndConditions'
 function ScrollToTopOnRoute() {
   const { pathname, hash } = useLocation()
 
-  useEffect(() => {
-    if (!hash) window.scrollTo({ top: 0, behavior: 'auto' })
+  useLayoutEffect(() => {
+    if (hash) return undefined
+
+    const root = document.documentElement
+    const previousScrollBehavior = root.style.scrollBehavior
+
+    window.history.scrollRestoration = 'manual'
+    root.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0)
+      root.style.scrollBehavior = previousScrollBehavior
+    })
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      root.style.scrollBehavior = previousScrollBehavior
+    }
   }, [pathname, hash])
 
   return null

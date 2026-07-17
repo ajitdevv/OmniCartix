@@ -16,6 +16,17 @@ const footerLinks = [
   { label: 'Terms & Conditions', to: '/terms-and-conditions' }
 ]
 
+function resetPageScroll() {
+  const root = document.documentElement
+  const previousScrollBehavior = root.style.scrollBehavior
+
+  root.style.scrollBehavior = 'auto'
+  window.scrollTo(0, 0)
+  window.requestAnimationFrame(() => {
+    root.style.scrollBehavior = previousScrollBehavior
+  })
+}
+
 export function Footer() {
   const location = useLocation()
 
@@ -28,7 +39,7 @@ export function Footer() {
         </div>
         <nav className="flex flex-wrap gap-x-4 gap-y-3 lg:justify-end" aria-label="Footer navigation">
           {footerLinks.map((link) => (
-            <Link key={link.to} to={link.to} aria-current={location.pathname === link.to ? 'page' : undefined} className="font-bold text-white/75 transition hover:text-white">
+            <Link key={link.to} to={link.to} onClick={!link.to.includes('#') ? resetPageScroll : undefined} aria-current={location.pathname === link.to ? 'page' : undefined} className="font-bold text-white/75 transition hover:text-white">
               {link.label}
             </Link>
           ))}

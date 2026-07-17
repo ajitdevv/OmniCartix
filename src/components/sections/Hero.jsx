@@ -18,7 +18,7 @@ function HeroArt() {
       <circle className="hero-art__ring" cx="260" cy="260" r="196" fill="none" stroke="#d4d4d4" strokeWidth="2" strokeDasharray="8 14" />
       <circle className="hero-art__ring hero-art__ring--reverse" cx="260" cy="260" r="142" fill="none" stroke="#a3a3a3" strokeWidth="2" strokeDasharray="7 12" />
       <path d="M134 179C164 94 294 79 368 137C442 195 464 315 400 391C336 467 209 455 150 386C91 317 104 264 134 179Z" fill="url(#blueGradient)" opacity="0.12" />
-      <rect className="hero-art__panel" x="142" y="122" width="236" height="276" rx="42" fill="#fff" />
+      <rect className="hero-art__panel" x="142" y="122" width="236" height="276" rx="42" fill="rgba(255,255,255,.72)" />
       <rect x="166" y="148" width="188" height="24" rx="12" fill="#e5e5e5" />
       <rect x="166" y="190" width="112" height="16" rx="8" fill="#d4d4d4" />
       <rect x="166" y="222" width="160" height="16" rx="8" fill="#ededed" />
